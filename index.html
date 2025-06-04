@@ -3,15 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Maria Eduarda · Portfólio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <title>Portfólio | Maria Eduarda Ferreira</title>
   <style>
-    :root {
-      --bg-color: #f9f9f9;
-      --text-color: #222;
-      --accent-color: #4f46e5;
-    }
-
+    /* Reset básico */
     * {
       margin: 0;
       padding: 0;
@@ -19,91 +13,158 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg-color);
-      color: var(--text-color);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 3rem 1rem;
+      font-family: "Inter", sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
     }
 
     .container {
-      max-width: 700px;
-      width: 100%;
+      width: 90%;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      background-color: #fff;
+      padding: 60px 0;
       text-align: center;
+      border-bottom: 1px solid #ddd;
     }
 
-    h1 {
+    .profile-img {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 6px solid #209869;
+  background-color: #e9f7f2;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 25px;
+}
+
+.profile-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+
+    .header h1 {
       font-size: 2.5rem;
-      margin-bottom: 1rem;
+      color: #209869;
     }
 
-    p {
+    .header p {
       font-size: 1.1rem;
-      line-height: 1.6;
-      margin-bottom: 2rem;
+      color: #555;
     }
 
-    .projects {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      margin-bottom: 3rem;
+    /* Projetos */
+    .projects h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: #209869;
+      text-align: center;
+      margin-top: 50px;
     }
 
-    .project {
-      background: white;
+    .project-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background-color: #fff;
       border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
-      text-align: left;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
 
-    .project h2 {
-      color: var(--accent-color);
-      margin-bottom: 0.5rem;
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
     }
 
-    .project p {
-      font-size: 1rem;
-      margin-bottom: 0;
+    .project-card h3 {
+      color: #209869;
+      margin-bottom: 10px;
     }
 
-    footer a {
-      color: var(--accent-color);
+    .project-card p {
+      color: #555;
+    }
+
+    .project-card a {
+      display: inline-block;
+      margin-top: 10px;
+      color: #209869;
       text-decoration: none;
-      font-weight: 600;
     }
 
-    footer {
-      font-size: 0.95rem;
+    .project-card a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #fff;
+      border-top: 1px solid #ddd;
+      margin-top: 60px;
+    }
+
+    .footer p {
+      color: #777;
+      font-size: 0.9rem;
     }
   </style>
 </head>
+
 <body>
-  <div class="container">
-    <h1>Maria Eduarda</h1>
-    <p>Olá! Sou uma profissional focada em automações inteligentes com UiPath, Looker Studio, Make e n8n. Aqui estão alguns dos meus projetos favoritos:</p>
-
-    <div class="projects">
-      <div class="project">
-        <h2>📊 Dashboard de Cotações</h2>
-        <p>Dashboard no Looker Studio com dados dinâmicos do banco Atlantis, mostrando status de cotações em tempo real.</p>
-      </div>
-      <div class="project">
-        <h2>🤖 Automação de E-mails com Make + Outlook</h2>
-        <p>Criei um robô que monitora e-mails com palavras-chave, organiza em planilhas e envia alertas automáticos.</p>
-      </div>
-      <div class="project">
-        <h2>📈 Histórico de Profit com UiPath</h2>
-        <p>Automatizei a geração mensal de relatórios comparativos de lucros por processo, com controle de versões e análises.</p>
-      </div>
+  <header class="header">
+    <div class="container">
+      <img src="/images/sua-foto.jpeg" alt="Minha Foto" class="profile-img" />
+      <h1>Maria Eduarda Ferreira</h1>
+      <p>Desenvolvedora | Dados | Automação</p>
     </div>
+  </header>
 
-    <footer>
-      <p>Entre em contato pelo <a href="mailto:seuemail@gmail.com">e-mail</a> ou <a href="https://www.linkedin.com/in/seulink">LinkedIn</a>.</p>
-    </footer>
-  </div>
+  <main class="container">
+
+    <!-- Seção Projetos Acadêmicos -->
+    <section class="projects">
+      <h2>Projetos Acadêmicos</h2>
+      <div class="project-list">
+
+        <div class="project-card">
+          <h3>Curso Online Metodologia Ágil SCRUM - 1º SEMESTRE</h3>
+          <p>Aplicação Web sobre Scrum desenvolvida como projeto do 1° semestre na FATEC Jacareí.</p>
+          <a href="https://github.com/TechWizards-Tech/DSM-1" target="_blank">Ver projeto</a>
+        </div>
+
+        <div class="project-card">
+          <h3>Contador de Calorias - 2º SEMESTRE</h3>
+          <p>Aplicação Web que calcula calorias e sugere dietas, desenvolvida no 2° semestre na FATEC Jacareí.</p>
+          <a href="https://github.com/TechWizards-Tech/DSM-2" target="_blank">Ver projeto</a>
+        </div>
+
+        <div class="project-card">
+          <h3>Plataforma de Dados Meteorológicos - 3º SEMESTRE</h3>
+          <p>Plataforma web para visualização de dados meteorológicos, desenvolvida no 3° semestre da FATEC Jacareí.</p>
+          <a href="https://github.com/TechWizards-Tech/HALF-TECH---DSM-3" target="_blank">Ver projeto</a>
+        </div>
+
+      </div>
+
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 Maria Eduarda . Todos os direitos reservados.</p>
+  </footer>
 </body>
 </html>
