@@ -1,7 +1,7 @@
 # Portfólio de Projetos - Fatec Jacareí
 ### Aluno: Maria Eduarda Ferreira 
 ### Curso: Desenvolvimento de Software Multiplataforma
-### Turma: 4º Semestre de 2025
+### Turma: 1º Semestre de 2024
  
 
 
