@@ -1,235 +1,1049 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="pt-br">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Maria Eduarda Ferreira — Portfólio</title>
-  <meta name="description" content="Portfólio minimalista de Maria Eduarda Ferreira — Desenvolvedora focada em dados e automação." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#fbf5f0; /* tom pêssego claro como no anexo */
-      --ink:#1e1e1e;
-      --muted:#6d6d6d;
-      --card:#ffffff;
-      --stroke:#e7e0da;
-      --accent:#209869; /* seu verde */
-      --shadow: 0 8px 26px rgba(0,0,0,.08);
-    }
-    @media (prefers-color-scheme: dark){
-      :root{ --bg:#0f1213; --ink:#ececec; --muted:#b8b8b8; --card:#121517; --stroke:#1f2426; --shadow: 0 10px 30px rgba(0,0,0,.45);}  
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
-    body{font-family:"Inter",system-ui,Segoe UI,Roboto,Arial;color:var(--ink);background:var(--bg); line-height:1.6}
-    a{color:inherit;text-decoration:none}
-    a:focus-visible{outline:3px solid var(--accent);border-radius:8px;outline-offset:2px}
-
-    .container{width:92%;max-width:1200px;margin:0 auto}
-
-    /* ======= Topbar ======= */
-    .topbar{position:relative; z-index:3;}
-    .topbar-inner{display:flex; align-items:center; justify-content:space-between; padding:22px 0}
-    .brand{display:flex; align-items:center; gap:10px; font-weight:800}
-    .logo{position:relative; width:32px; height:22px}
-    .logo i{position:absolute; width:22px; height:22px; border-radius:50%}
-    .logo i:nth-child(1){left:0; top:0; background:#1b1b1b}
-    .logo i:nth-child(2){left:12px; top:0; background:var(--accent); mix-blend-mode:multiply}
-    .nav{display:flex; gap:28px; align-items:center}
-    .nav a{color:var(--ink); font-weight:600}
-    .nav a:hover{opacity:.7}
-    .lang{display:flex; align-items:center; gap:6px}
-
-    /* ======= Hero ======= */
-    .hero{position:relative; overflow:hidden}
-    .hero::before{ /* linha pontilhada atravessando, como no anexo */
-      content:""; position:absolute; left:0; right:0; top:52%; border-bottom:2px dotted #bcb6b1; z-index:1
-    }
-    .hero-inner{display:grid; grid-template-columns: 1.1fr .9fr; align-items:center; gap:40px; min-height:520px; padding:36px 0}
-    .kicker{font-size:.95rem; color:var(--muted); letter-spacing:.02em}
-    .title{font-size: clamp(2.2rem, 4vw, 3.6rem); line-height:1.02; font-weight:800; margin:8px 0 10px}
-    .cta-row{display:flex; gap:16px; align-items:center; margin-top:18px}
-    .btn{--glow:rgba(32,152,105,.35);position:relative;display:inline-flex;align-items:center;gap:10px;padding:14px 18px;border-radius:999px;font-weight:700;letter-spacing:.2px;color:var(--ink);background:var(--card);box-shadow:0 2px 0 rgba(0,0,0,.05),0 8px 22px rgba(0,0,0,.10);z-index:2;border:none}
-.btn::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.8px;background:linear-gradient(120deg,var(--accent),#7fd8b7,#1f1f1f);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
-.btn:hover{transform:translateY(-1px);box-shadow:0 10px 26px var(--glow);background:color-mix(in oklab,var(--accent) 16%, var(--card))}
-.btn:active{transform:translateY(0);box-shadow:0 2px 14px var(--glow)}
-.btn:focus-visible{outline:4px solid color-mix(in oklab,var(--accent) 55%, transparent);outline-offset:3px}
-.btn svg{width:20px;height:20px;transition:transform .25s ease}
-.btn:hover svg{transform:translateX(4px)}
-
-    /* Foto com moldura circular e shape por trás */
-    .photo-wrap{position:relative; width:min(440px, 80vw); margin-inline:auto}
-    .photo-wrap::before{content:""; position:absolute; width:260px; height:260px; background:#1f1f1f; border-radius:50%; left:-18%; top:18%; z-index:0}
-    .photo{position:relative; z-index:2; width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:50%; border:2px solid #bcb6b1; background:#ddd; box-shadow:var(--shadow)}
-
-    /* Bloco de descrição à direita (como no anexo) */
-    .side-note{position:relative; z-index:2; max-width:360px; color:#3a3a3a}
-    @media (prefers-color-scheme: dark){ .side-note{color:#d5d5d5} }
-
-    /* Indicador de scroll */
-    .scroll-cue{position:absolute; left:50%; transform:translateX(-50%); bottom:16px; font-size:.9rem; color:var(--muted)}
-
-    /* ======= Projetos ======= */
-    section#projetos{padding:70px 0}
-    .section-title{font-size:1.6rem; font-weight:800; margin-bottom:24px}
-    .projects{display:grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:18px}
-    .card{background:var(--card); border:1px solid var(--stroke); border-radius:14px; padding:18px; box-shadow:var(--shadow)}
-    .card h3{font-size:1.05rem; margin-bottom:6px}
-    .card p{color:var(--muted); font-size:.97rem}
-    .card a{display:inline-flex; align-items:center; gap:8px; margin-top:10px; font-weight:600}
-    .card a svg{width:18px; height:18px}
-
-    /* ======= Ícones laterais (opcional) ======= */
-    .side-icons{position:fixed; right:16px; top:40%; display:flex; flex-direction:column; gap:10px; z-index:10}
-    .side-icons a{width:42px; height:42px; display:grid; place-items:center; border-radius:50%; background:var(--card); border:1px solid var(--stroke); box-shadow:var(--shadow)}
-
-    /* ======= Responsivo ======= */
-    @media (max-width: 900px){
-      .hero-inner{grid-template-columns:1fr; gap:28px; min-height:unset}
-      .hero::before{top:48%}
-      .side-note{order:3}
-    }
-    /* --- Hover com cor nos cards de projeto (NÃO remover nada acima) --- */
-.card {
-  position: relative;
-  overflow: hidden;
-  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
-}
-
-.card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  /* tinta verde suave; ajusta a opacidade se quiser mais/menos destaque */
-  background: linear-gradient(135deg, rgba(32,152,105,.14), rgba(32,152,105,0) 70%);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .28s ease;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 36px rgba(0,0,0,.14);
-  border-color: rgba(32,152,105,.35); /* borda com tom do accent */
-}
-
-.card:hover::after { opacity: 1; }
-
-.card h3 { transition: color .28s ease; }
-.card:hover h3 { color: var(--accent); }
-
-/* (opcional) efeito glass sutil no hover:
-.card::after { backdrop-filter: blur(3px); }
-*/
-
-  </style>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Maria Eduarda - Portfólio</title>
+    <meta name="description"
+        content="Portfólio de Maria Eduarda Ferreira — desenvolvimento de sistemas, integrações com IA e automação de processos." />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preload" as="image" href="imagens/perfil.jpeg">
+    <link rel="preload" as="image" href="imagens/crm.png">
+    <link rel="preload" as="image" href="imagens/speakmind.jpeg">
 </head>
-<body>
 
-  <!-- Topbar -->
-  <header class="topbar">
-    <div class="container topbar-inner">
-      <div class="brand" aria-label="Maria Eduarda Ferreira">
-        <span class="logo" aria-hidden="true"><i></i><i></i></span>
-        <span>Maria&nbsp;Eduarda&nbsp;Ferreira</span>
-  </header>
-
-  <!-- Ícones laterais (ex.: LinkedIn e e-mail) -->
-  <aside class="side-icons" aria-label="Contatos">
-    <a href="https://www.linkedin.com/in/mariafs15" target="_blank" rel="noopener noreferrer" title="LinkedIn — mariafs15" aria-label="Abrir LinkedIn de Maria Eduarda Ferreira">
-      <!-- ícone linkedin -->
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2c-1.1 0-2 .9-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-    </a>
-    <a href="mailto:mferreira1502s@gmail.com" title="E-mail">
-      <!-- ícone e-mail -->
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-    </a>
-  </aside>
-
-  <!-- Hero -->
-  <section class="hero" aria-label="Apresentação">
-    <div class="container hero-inner">
-      <div>
-        <p class="kicker">Olá — prazer em te ver aqui</p>
-        <h1 class="title">Maria Eduarda Ferreira</h1>
-        <div class="cta-row">
-          <a class="btn" href="#projetos" aria-label="Ir para a seção de projetos"><span>Ver projetos</span><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></a>
+<body
+    class="bg-background-light dark:bg-background-dark text-[#181113] dark:text-white font-display overflow-x-hidden selection:bg-primary selection:text-white">
+    <!-- Navigation -->
+    <nav
+        class="fixed top-0 left-0 w-full z-50 px-6 py-6 flex justify-between items-center mix-blend-difference text-white">
+        <a class="text-xl font-bold tracking-tighter relative z-50" href="#">ME.</a>
+        <div class="hidden md:flex gap-8 text-sm font-medium items-center">
+            <a class="hover:text-primary transition-colors" href="#work" data-i18n="nav_work">Pessoais</a>
+            <a class="hover:text-primary transition-colors" href="#academic" data-i18n="nav_academic">Acadêmico</a>
+            <a class="hover:text-primary transition-colors" href="#labs" data-i18n="nav_labs">Profissionais</a>
+            <a class="hover:text-primary transition-colors" href="#about" data-i18n="nav_about">Sobre</a>
+            <a class="hover:text-primary transition-colors" href="#contact" data-i18n="nav_contact">Contato</a>
+            <button onclick="toggleLanguage()" id="lang-toggle" aria-label="Toggle Language"
+                class="font-bold border border-white/20 px-3 py-1 rounded-full text-xs hover:bg-white hover:text-black transition-all">
+                EN
+            </button>
         </div>
-      </div>
+        <!-- Mobile Language Toggle -->
+        <button onclick="toggleLanguage()" id="lang-toggle-mobile" aria-label="Toggle Language"
+            class="md:hidden font-bold border border-white/20 px-3 py-1 rounded-full text-xs hover:bg-white hover:text-black transition-all relative z-50">
+            EN
+        </button>
+    </nav>
 
-      <div class="photo-wrap" aria-hidden="false">
-        <img src="imagens/foto.jpeg" alt="Foto de Maria Eduarda Ferreira" class="photo" width="420" height="420" loading="eager" />
-      </div>
+    <!-- Hero Section -->
+    <header class="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden">
+        <!-- Abstract Background Shapes -->
+        <div
+            class="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[100px] animate-pulse">
+        </div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-sage/20 rounded-full blur-[80px]"></div>
+        <div class="z-10 text-center px-4 flex flex-col items-center gap-6">
+            <div class="overflow-hidden">
+                <h1 class="text-[15vw] leading-[0.8] font-bold tracking-tighter text-[#181113] dark:text-white animate-fade-in-up"
+                    style="animation-delay: 0.2s;" data-i18n="hero_greeting">
+                    Olá.
+                </h1>
+            </div>
+            <div class="overflow-hidden">
+                <h2 class="text-4xl md:text-6xl font-medium tracking-tight text-sage dark:text-sage-light animate-fade-in-up"
+                    style="animation-delay: 0.5s;" data-i18n="hero_intro">
+                    Eu sou Maria Eduarda
+                </h2>
+            </div>
+            <p class="mt-8 text-lg md:text-xl max-w-lg text-center text-gray-600 dark:text-gray-300 animate-fade-in-up"
+                style="animation-delay: 0.8s;" data-i18n="hero_role">
+                Especialista em desenvolvimento de Software com foco em performance e experiência do usuário.
+            </p>
+        </div>
+        <!-- Marquee -->
+        <div
+            class="absolute bottom-10 w-full overflow-hidden whitespace-nowrap border-y border-gray-200 dark:border-gray-800 py-4 bg-white/50 dark:bg-black/20 backdrop-blur-sm">
+            <div class="inline-flex gap-12 animate-marquee">
+                <span class="text-lg font-bold text-gray-400 uppercase tracking-widest">React • Python • UX Design •
+                    Node.js • API • TypeScript • Tailwind CSS • Next.js • JavaScript React • Python • UX Design •
+                    Node.js • API • TypeScript • Tailwind CSS • Next.js • JavaScript</span>
+                <span class="text-lg font-bold text-gray-400 uppercase tracking-widest">React • Python • UX Design •
+                    Node.js • API • TypeScript • Tailwind CSS • Next.js • JavaScript React • Python • UX Design •
+                    Node.js • API • TypeScript • Tailwind CSS • Next.js • JavaScript</span>
+            </div>
+        </div>
+    </header>
 
-      <p class="side-note">Desenvolvedora especializada em dados e automação. Gosto de construir soluções simples, acessíveis e robustas para problemas reais.</p>
+    <!-- Horizontal Scroll Projects Section -->
+    <section class="py-20 bg-white dark:bg-[#1a0d11]" id="work">
+        <div class="container mx-auto px-6 mb-12 flex items-end justify-between">
+            <div>
+                <h2 class="text-sm font-bold text-primary tracking-widest uppercase mb-2"
+                    data-i18n="section_selected_works">Trabalhos Selecionados</h2>
+                <h3 class="text-4xl md:text-5xl font-bold text-[#181113] dark:text-white"
+                    data-i18n="section_recent_projects">Projetos Pessoais</h3>
+            </div>
+            <div class="hidden md:flex gap-2 items-center">
+                <button onclick="scrollProjects(-1)"
+                    class="p-1 hover:bg-gray-100 dark:hover:bg-white/10 rounded-full transition-colors"
+                    aria-label="Projetos anteriores">
+                    <span class="material-symbols-outlined text-gray-400">arrow_back</span>
+                </button>
+                <span class="material-symbols-outlined text-gray-400">horizontal_distribute</span>
+                <button onclick="scrollProjects(1)"
+                    class="p-1 hover:bg-gray-100 dark:hover:bg-white/10 rounded-full transition-colors"
+                    aria-label="Próximos projetos">
+                    <span class="material-symbols-outlined text-[#181113] dark:text-white animate-bounce"
+                        style="animation-direction: alternate-reverse;">arrow_forward</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Scroll Container -->
+        <div id="works-container"
+            class="flex overflow-x-auto no-scrollbar gap-6 px-6 pb-12 snap-x snap-mandatory scroll-smooth">
+
+            <!-- App Theo Dog Rações — controle de vendas -->
+            <div onclick="openLightbox('imagens/theo-dog-app.png', 'App de Controle de Vendas — Theo Dog Rações')"
+                class="relative min-w-[85vw] md:min-w-[60vw] lg:min-w-[45vw] aspect-[4/3] md:aspect-[16/9] rounded-2xl overflow-hidden snap-center group shadow-xl cursor-pointer">
+                <div class="absolute inset-0 bg-gray-100 dark:bg-zinc-900">
+                    <img alt="Telas de Caderneta, Início e Fechamento diário do app de vendas"
+                        class="w-full h-full object-contain transition-transform duration-700"
+                        src="imagens/theo-dog-app.png" loading="lazy" width="1920" height="1080" />
+                    <div class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors"></div>
+                </div>
+                <div
+                    class="absolute bottom-6 left-6 right-6 glass-panel p-6 rounded-xl flex justify-between items-end gap-4 transform transition-all duration-500 translate-y-2 group-hover:translate-y-0">
+                    <div>
+                        <h4 class="text-2xl font-bold text-[#181113] dark:text-white mb-1" data-i18n="theodog_title">
+                            App de Vendas — Casa de Ração</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-1 line-clamp-2" data-i18n="theodog_desc">
+                            App mobile (PWA) para registrar vendas, controlar a caderneta de fiado e fazer os fechamentos diário e mensal do caixa.</p>
+                        <p class="text-sm font-medium text-gray-600 dark:text-gray-300">Python / Django / Cloudflare
+                            Workers / D1 / PWA</p>
+                    </div>
+                    <span
+                        class="size-10 shrink-0 rounded-full bg-primary text-white flex items-center justify-center group-hover:bg-black transition-colors">
+                        <span class="material-symbols-outlined text-xl">arrow_outward</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Meta Certa — planejamento financeiro com IA -->
+            <div onclick="openLightbox('imagens/meta-certa-app.png', 'Meta Certa — Planejamento Financeiro com IA')"
+                class="relative min-w-[85vw] md:min-w-[60vw] lg:min-w-[45vw] aspect-[4/3] md:aspect-[16/9] rounded-2xl overflow-hidden snap-center group shadow-xl cursor-pointer">
+                <div class="absolute inset-0 bg-gray-100 dark:bg-zinc-900">
+                    <img alt="Telas de Gastos, Início e Objetivo do app Meta Certa"
+                        class="w-full h-full object-contain transition-transform duration-700"
+                        src="imagens/meta-certa-app.png" loading="lazy" width="1920" height="1080" />
+                    <div class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors"></div>
+                </div>
+                <div
+                    class="absolute bottom-6 left-6 right-6 glass-panel p-6 rounded-xl flex justify-between items-end gap-4 transform transition-all duration-500 translate-y-2 group-hover:translate-y-0">
+                    <div>
+                        <h4 class="text-2xl font-bold text-[#181113] dark:text-white mb-1" data-i18n="metacerta_title">
+                            Meta Certa</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-1 line-clamp-2" data-i18n="metacerta_desc">
+                            Planejamento financeiro pessoal com IA: controla gastos por categoria, acompanha investimentos e cria recomendações e desafios semanais para bater a meta.</p>
+                        <p class="text-sm font-medium text-gray-600 dark:text-gray-300">JavaScript / Tailwind CSS / Node.js /
+                            Supabase / OpenAI API</p>
+                    </div>
+                    <span
+                        class="size-10 shrink-0 rounded-full bg-primary text-white flex items-center justify-center group-hover:bg-black transition-colors">
+                        <span class="material-symbols-outlined text-xl">arrow_outward</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Landing Page Promocional -->
+            <div onclick="openLightbox('imagens/lp-crm.png', 'Landing Page Promocional')"
+                class="relative min-w-[85vw] md:min-w-[60vw] lg:min-w-[45vw] aspect-[4/3] md:aspect-[16/9] rounded-2xl overflow-hidden snap-center group shadow-xl cursor-pointer">
+                <div class="absolute inset-0 bg-gray-100 dark:bg-zinc-900">
+                    <img alt="Landing Page Promocional"
+                        class="w-full h-full object-contain transition-transform duration-700" src="imagens/lp-crm.png"
+                        loading="lazy" width="800" height="450" />
+                    <div class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors"></div>
+                </div>
+                <div
+                    class="absolute bottom-6 left-6 right-6 glass-panel p-6 rounded-xl flex justify-between items-end transform transition-all duration-500 translate-y-2 group-hover:translate-y-0">
+                    <div>
+                        <h4 class="text-2xl font-bold text-[#181113] dark:text-white mb-1" data-i18n="lp_title">Landing
+                            Page Promocional</h4>
+                        <p class="text-sm font-medium text-gray-600 dark:text-gray-300">HTML5 / Tailwind CSS</p>
+                    </div>
+                    <span
+                        class="size-10 shrink-0 rounded-full bg-primary text-white flex items-center justify-center group-hover:bg-black transition-colors">
+                        <span class="material-symbols-outlined text-xl">arrow_outward</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Sistema CRM -->
+            <div onclick="openLightbox('imagens/crm.png', 'Sistema CRM')"
+                class="relative min-w-[85vw] md:min-w-[60vw] lg:min-w-[45vw] aspect-[4/3] md:aspect-[16/9] rounded-2xl overflow-hidden snap-center group shadow-xl cursor-pointer">
+                <div class="absolute inset-0 bg-gray-100 dark:bg-zinc-900">
+                    <img alt="Sistema CRM"
+                        class="w-full h-full object-contain transition-transform duration-700" src="imagens/crm.png"
+                        loading="eager" width="800" height="450" />
+                    <div class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors"></div>
+                </div>
+                <div
+                    class="absolute bottom-6 left-6 right-6 glass-panel p-6 rounded-xl flex justify-between items-end transform transition-all duration-500 translate-y-2 group-hover:translate-y-0">
+                    <div>
+                        <h4 class="text-2xl font-bold text-[#181113] dark:text-white mb-1" data-i18n="crm_title">Sistema CRM</h4>
+                        <p class="text-sm font-medium text-gray-600 dark:text-gray-300">React / FastAPI / Python /
+                            PostgreSQL</p>
+                    </div>
+                    <span
+                        class="size-10 shrink-0 rounded-full bg-primary text-white flex items-center justify-center group-hover:bg-black transition-colors">
+                        <span class="material-symbols-outlined text-xl">arrow_outward</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Landing Page Casa de Ração -->
+            <div onclick="openLightbox('imagens/lp-casa-racao.png', 'Landing Page Casa de Ração')"
+                class="relative min-w-[85vw] md:min-w-[60vw] lg:min-w-[45vw] aspect-[4/3] md:aspect-[16/9] rounded-2xl overflow-hidden snap-center group shadow-xl cursor-pointer">
+                <div class="absolute inset-0 bg-gray-100 dark:bg-zinc-900">
+                    <img alt="Landing Page Casa de Ração"
+                        class="w-full h-full object-contain transition-transform duration-700"
+                        src="imagens/lp-casa-racao.png" loading="lazy" width="800" height="450" />
+                    <div class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors"></div>
+                </div>
+                <div
+                    class="absolute bottom-6 left-6 right-6 glass-panel p-6 rounded-xl flex justify-between items-end transform transition-all duration-500 translate-y-2 group-hover:translate-y-0">
+                    <div>
+                        <h4 class="text-2xl font-bold text-[#181113] dark:text-white mb-1" data-i18n="petshop_title">
+                            Landing Page Casa de Ração</h4>
+                        <p class="text-sm font-medium text-gray-600 dark:text-gray-300">React 19 / Vite 6 / Tailwind 4 /
+                            TypeScript / Motion</p>
+                    </div>
+                    <span
+                        class="size-10 shrink-0 rounded-full bg-primary text-white flex items-center justify-center group-hover:bg-black transition-all">
+                        <span class="material-symbols-outlined text-xl">arrow_outward</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- SpeakMind -->
+            <div onclick="openLightbox('imagens/speakmind.jpeg', 'SpeakMind - Chat de Inglês')"
+                class="relative min-w-[85vw] md:min-w-[60vw] lg:min-w-[45vw] aspect-[4/3] md:aspect-[16/9] rounded-2xl overflow-hidden snap-center group shadow-xl cursor-pointer">
+                <div class="absolute inset-0 bg-gray-100 dark:bg-zinc-900">
+                    <img alt="SpeakMind - Chat de Inglês"
+                        class="w-full h-full object-contain transition-transform duration-700"
+                        src="imagens/speakmind.jpeg" loading="eager" width="800" height="450" />
+                    <div class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors"></div>
+                </div>
+                <div
+                    class="absolute bottom-6 left-6 right-6 glass-panel p-6 rounded-xl flex justify-between items-end transform transition-all duration-500 translate-y-2 group-hover:translate-y-0">
+                    <div>
+                        <h4 class="text-2xl font-bold text-[#181113] dark:text-white mb-1" data-i18n="speak_title">
+                            SpeakMind</h4>
+                        <p class="text-sm font-medium text-gray-600 dark:text-gray-300">Next.js 15 / AI / Tailwind CSS /
+                            Vercel AI SDK</p>
+                    </div>
+                    <span
+                        class="size-10 shrink-0 rounded-full bg-primary text-white flex items-center justify-center group-hover:bg-black transition-all">
+                        <span class="material-symbols-outlined text-xl">arrow_outward</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Gestão Financeira Pessoal -->
+            <div onclick="openLightbox('imagens/planejador-financeiro.png', 'Gestão Financeira Pessoal')"
+                class="relative min-w-[85vw] md:min-w-[60vw] lg:min-w-[45vw] aspect-[4/3] md:aspect-[16/9] rounded-2xl overflow-hidden snap-center group shadow-xl cursor-pointer">
+                <div class="absolute inset-0 bg-gray-100 dark:bg-zinc-900">
+                    <img alt="Gestão Financeira Pessoal"
+                        class="w-full h-full object-contain transition-transform duration-700"
+                        src="imagens/planejador-financeiro.png" loading="lazy" width="800" height="450" />
+                    <div class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors"></div>
+                </div>
+                <div
+                    class="absolute bottom-6 left-6 right-6 glass-panel p-6 rounded-xl flex justify-between items-end transform transition-all duration-500 translate-y-2 group-hover:translate-y-0">
+                    <div>
+                        <h4 class="text-2xl font-bold text-[#181113] dark:text-white mb-1" data-i18n="finance_title">
+                            Gestão Financeira Pessoal</h4>
+                        <p class="text-sm font-medium text-gray-600 dark:text-gray-300">React / TypeScript / Supabase /
+                            Integração com WhatsApp</p>
+                    </div>
+                    <span
+                        class="size-10 shrink-0 rounded-full bg-primary text-white flex items-center justify-center group-hover:bg-black transition-colors">
+                        <span class="material-symbols-outlined text-xl">arrow_outward</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Academic Projects Section -->
+    <section class="py-20 bg-background-light dark:bg-background-dark" id="academic">
+        <div class="container mx-auto px-6 mb-12 flex items-end justify-between">
+            <div>
+                <h2 class="text-sm font-bold text-primary tracking-widest uppercase mb-2"
+                    data-i18n="section_academic_works">Jornada Acadêmica</h2>
+                <h3 class="text-4xl md:text-5xl font-bold text-[#181113] dark:text-white"
+                    data-i18n="section_academic_projects">Projetos de Graduação</h3>
+            </div>
+            <div class="hidden md:flex gap-2 items-center">
+                <button onclick="scrollAcademic(-1)"
+                    class="p-1 hover:bg-gray-100 dark:hover:bg-white/10 rounded-full transition-colors"
+                    aria-label="Projetos acadêmicos anteriores">
+                    <span class="material-symbols-outlined text-gray-400">arrow_back</span>
+                </button>
+                <span class="material-symbols-outlined text-gray-400">horizontal_distribute</span>
+                <button onclick="scrollAcademic(1)"
+                    class="p-1 hover:bg-gray-100 dark:hover:bg-white/10 rounded-full transition-colors"
+                    aria-label="Próximos projetos acadêmicos">
+                    <span class="material-symbols-outlined text-[#181113] dark:text-white">arrow_forward</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="academic-container"
+            class="flex overflow-x-auto no-scrollbar gap-6 px-6 pb-12 snap-x snap-mandatory scroll-smooth">
+            <!-- 1º Semestre -->
+            <article
+                class="snap-center shrink-0 w-[85vw] md:w-[60vw] lg:w-[45vw] rounded-2xl overflow-hidden bg-white dark:bg-zinc-900 shadow-xl flex flex-col">
+                <button type="button" onclick="openLightbox('imagens/1sem.jpeg', 'Curso Online de Scrum — 1DSM – 1º Sem. 2024')"
+                    class="relative block w-full aspect-[16/9] bg-gray-100 dark:bg-zinc-800 group cursor-pointer"
+                    aria-label="Ampliar imagem do projeto Curso Online de Scrum">
+                    <img alt="Curso Online de Scrum" class="w-full h-full object-contain" src="imagens/1sem.jpeg" loading="lazy" />
+                    <span class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors"></span>
+                </button>
+                <div class="p-6 flex flex-col gap-3 flex-1">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="text-xs font-bold px-3 py-1 rounded-full bg-primary/10 text-primary" data-i18n="academic_1sem_sem">1DSM – 1º Sem. 2024</span>
+                        <span class="text-xs font-bold px-3 py-1 rounded-full bg-sage/20 text-[#4f6a5e] dark:text-sage-light" data-i18n="academic_1sem_role">Desenvolvedora</span>
+                    </div>
+                    <h4 class="text-2xl font-bold text-[#181113] dark:text-white" data-i18n="academic_1sem_title">Curso Online de Scrum</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-300" data-i18n="academic_1sem_desc">Aplicação web com um curso sobre a metodologia ágil Scrum, com questões e emissão de certificado.</p>
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-widest text-primary mb-2" data-i18n="label_contribution">Minha contribuição</p>
+                        <ul class="list-disc pl-5 space-y-1 text-sm text-gray-700 dark:text-gray-200">
+                            <li data-i18n="academic_1sem_c1">Definição dos elementos das páginas para os protótipos iniciais</li>
+                            <li data-i18n="academic_1sem_c2">HTML e CSS das páginas 4 e 5 do curso</li>
+                            <li data-i18n="academic_1sem_c3">Página de questões e integração JavaScript para carregar as perguntas no front-end</li>
+                        </ul>
+                    </div>
+                    <p class="text-[11px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">HTML5, CSS3, JavaScript, Node.js, PostgreSQL</p>
+                    <a href="https://github.com/TechWizards-Tech/DSM-1" target="_blank" rel="noopener noreferrer"
+                        aria-label="Ver repositório do projeto do 1º semestre no GitHub"
+                        class="mt-auto self-start inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-white text-sm font-bold shadow-lg shadow-primary/30 hover:bg-black transition-colors">
+                        <span class="material-symbols-outlined text-lg">code</span>
+                        <span data-i18n="link_github">Ver no GitHub</span>
+                    </a>
+                </div>
+            </article>
+            <!-- 2º Semestre -->
+            <article
+                class="snap-center shrink-0 w-[85vw] md:w-[60vw] lg:w-[45vw] rounded-2xl overflow-hidden bg-white dark:bg-zinc-900 shadow-xl flex flex-col">
+                <button type="button" onclick="openLightbox('imagens/2sem.jpeg', 'Contador de Calorias — 2DSM – 2º Sem. 2024')"
+                    class="relative block w-full aspect-[16/9] bg-gray-100 dark:bg-zinc-800 group cursor-pointer"
+                    aria-label="Ampliar imagem do projeto Contador de Calorias">
+                    <img alt="Contador de Calorias" class="w-full h-full object-contain" src="imagens/2sem.jpeg" loading="lazy" />
+                    <span class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors"></span>
+                </button>
+                <div class="p-6 flex flex-col gap-3 flex-1">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="text-xs font-bold px-3 py-1 rounded-full bg-primary/10 text-primary" data-i18n="academic_2sem_sem">2DSM – 2º Sem. 2024</span>
+                        <span class="text-xs font-bold px-3 py-1 rounded-full bg-sage/20 text-[#4f6a5e] dark:text-sage-light" data-i18n="academic_2sem_role">Desenvolvedora</span>
+                    </div>
+                    <h4 class="text-2xl font-bold text-[#181113] dark:text-white" data-i18n="academic_2sem_title">Contador de Calorias</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-300" data-i18n="academic_2sem_desc">Aplicação web que calcula a ingestão calórica diária e sugere dietas personalizadas.</p>
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-widest text-primary mb-2" data-i18n="label_contribution">Minha contribuição</p>
+                        <ul class="list-disc pl-5 space-y-1 text-sm text-gray-700 dark:text-gray-200">
+                            <li data-i18n="academic_2sem_c1">Diagramas UML de caso de uso, classe e sequência</li>
+                            <li data-i18n="academic_2sem_c2">Telas de login e cadastro, dicas e histórico de ingestão calórica</li>
+                            <li data-i18n="academic_2sem_c3">Interface responsiva e gráficos de burndown das sprints</li>
+                        </ul>
+                    </div>
+                    <p class="text-[11px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">React, TypeScript, Node.js, PostgreSQL</p>
+                    <a href="https://github.com/TechWizards-Tech/DSM-2" target="_blank" rel="noopener noreferrer"
+                        aria-label="Ver repositório do projeto do 2º semestre no GitHub"
+                        class="mt-auto self-start inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-white text-sm font-bold shadow-lg shadow-primary/30 hover:bg-black transition-colors">
+                        <span class="material-symbols-outlined text-lg">code</span>
+                        <span data-i18n="link_github">Ver no GitHub</span>
+                    </a>
+                </div>
+            </article>
+            <!-- 3º Semestre -->
+            <article
+                class="snap-center shrink-0 w-[85vw] md:w-[60vw] lg:w-[45vw] rounded-2xl overflow-hidden bg-white dark:bg-zinc-900 shadow-xl flex flex-col">
+                <button type="button" onclick="openLightbox('imagens/3sem.jpeg', 'Plataforma de Dados Meteorológicos — 3DSM – 1º Sem. 2025')"
+                    class="relative block w-full aspect-[16/9] bg-gray-100 dark:bg-zinc-800 group cursor-pointer"
+                    aria-label="Ampliar imagem do projeto Plataforma de Dados Meteorológicos">
+                    <img alt="Plataforma de Dados Meteorológicos" class="w-full h-full object-contain" src="imagens/3sem.jpeg" loading="lazy" />
+                    <span class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors"></span>
+                </button>
+                <div class="p-6 flex flex-col gap-3 flex-1">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="text-xs font-bold px-3 py-1 rounded-full bg-primary/10 text-primary" data-i18n="academic_3sem_sem">3DSM – 1º Sem. 2025</span>
+                        <span class="text-xs font-bold px-3 py-1 rounded-full bg-sage/20 text-[#4f6a5e] dark:text-sage-light" data-i18n="academic_3sem_role">Product Owner</span>
+                    </div>
+                    <h4 class="text-2xl font-bold text-[#181113] dark:text-white" data-i18n="academic_3sem_title">Plataforma de Dados Meteorológicos</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-300" data-i18n="academic_3sem_desc">Plataforma web para visualização de dados meteorológicos.</p>
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-widest text-primary mb-2" data-i18n="label_contribution">Minha contribuição</p>
+                        <ul class="list-disc pl-5 space-y-1 text-sm text-gray-700 dark:text-gray-200">
+                            <li data-i18n="academic_3sem_c1">Product Owner: priorização do backlog e documentação no README</li>
+                            <li data-i18n="academic_3sem_c2">Back-end de autenticação: rotas, controller de usuários e middleware</li>
+                            <li data-i18n="academic_3sem_c3">Modelos de usuário e dados meteorológicos e formulário de cadastro em React</li>
+                        </ul>
+                    </div>
+                    <p class="text-[11px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">React, TypeScript, Node.js, MongoDB</p>
+                    <a href="https://github.com/TechWizards-Tech/HALF-WIZARDS---DSM-3" target="_blank" rel="noopener noreferrer"
+                        aria-label="Ver repositório do projeto do 3º semestre no GitHub"
+                        class="mt-auto self-start inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-white text-sm font-bold shadow-lg shadow-primary/30 hover:bg-black transition-colors">
+                        <span class="material-symbols-outlined text-lg">code</span>
+                        <span data-i18n="link_github">Ver no GitHub</span>
+                    </a>
+                </div>
+            </article>
+            <!-- 4º Semestre -->
+            <article
+                class="snap-center shrink-0 w-[85vw] md:w-[60vw] lg:w-[45vw] rounded-2xl overflow-hidden bg-white dark:bg-zinc-900 shadow-xl flex flex-col">
+                <button type="button" onclick="openLightbox('imagens/4sem.jpeg', 'Captura Remota para Microscópios — 4DSM – 2º Sem. 2025')"
+                    class="relative block w-full aspect-[16/9] bg-gray-100 dark:bg-zinc-800 group cursor-pointer"
+                    aria-label="Ampliar imagem do projeto Captura Remota para Microscópios">
+                    <img alt="Captura Remota para Microscópios" class="w-full h-full object-contain" src="imagens/4sem.jpeg" loading="lazy" />
+                    <span class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors"></span>
+                </button>
+                <div class="p-6 flex flex-col gap-3 flex-1">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="text-xs font-bold px-3 py-1 rounded-full bg-primary/10 text-primary" data-i18n="academic_4sem_sem">4DSM – 2º Sem. 2025</span>
+                        <span class="text-xs font-bold px-3 py-1 rounded-full bg-sage/20 text-[#4f6a5e] dark:text-sage-light" data-i18n="academic_4sem_role">Product Owner</span>
+                    </div>
+                    <h4 class="text-2xl font-bold text-[#181113] dark:text-white" data-i18n="academic_4sem_title">Captura Remota para Microscópios</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-300" data-i18n="academic_4sem_desc">Sistema que transmite em tempo real as imagens de microscópios ópticos para um app mobile e uma interface web.</p>
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-widest text-primary mb-2" data-i18n="label_contribution">Minha contribuição</p>
+                        <ul class="list-disc pl-5 space-y-1 text-sm text-gray-700 dark:text-gray-200">
+                            <li data-i18n="academic_4sem_c1">Product Owner: backlog, tarefas das sprints e documentação</li>
+                            <li data-i18n="academic_4sem_c2">Documentos de UX: persona e jornada do usuário</li>
+                            <li data-i18n="academic_4sem_c3">Revisão e merge dos pull requests da equipe no fluxo main/dev/feature</li>
+                        </ul>
+                    </div>
+                    <p class="text-[11px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Raspberry Pi, Python (Flask), React, React Native</p>
+                    <a href="https://github.com/TechWizards-Tech/TECH-WIZARDS-DSM-4" target="_blank" rel="noopener noreferrer"
+                        aria-label="Ver repositório do projeto do 4º semestre no GitHub"
+                        class="mt-auto self-start inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-white text-sm font-bold shadow-lg shadow-primary/30 hover:bg-black transition-colors">
+                        <span class="material-symbols-outlined text-lg">code</span>
+                        <span data-i18n="link_github">Ver no GitHub</span>
+                    </a>
+                </div>
+            </article>
+            <!-- 5º Semestre -->
+            <article
+                class="snap-center shrink-0 w-[85vw] md:w-[60vw] lg:w-[45vw] rounded-2xl overflow-hidden bg-white dark:bg-zinc-900 shadow-xl flex flex-col">
+                <button type="button" onclick="openLightbox('imagens/5sem.png', 'WizardVision — 5DSM – 1º Sem. 2026')"
+                    class="relative block w-full aspect-[16/9] bg-gray-100 dark:bg-zinc-800 group cursor-pointer"
+                    aria-label="Ampliar imagem do projeto WizardVision">
+                    <img alt="WizardVision" class="w-full h-full object-contain" src="imagens/5sem.png" loading="lazy" />
+                    <span class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors"></span>
+                </button>
+                <div class="p-6 flex flex-col gap-3 flex-1">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="text-xs font-bold px-3 py-1 rounded-full bg-primary/10 text-primary" data-i18n="academic_5sem_sem">5DSM – 1º Sem. 2026</span>
+                        <span class="text-xs font-bold px-3 py-1 rounded-full bg-sage/20 text-[#4f6a5e] dark:text-sage-light" data-i18n="academic_5sem_role">Desenvolvedora</span>
+                    </div>
+                    <h4 class="text-2xl font-bold text-[#181113] dark:text-white" data-i18n="academic_5sem_title">WizardVision</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-300" data-i18n="academic_5sem_desc">Análise de desempenho físico de atletas de futebol com IA: identifica perfis, detecta quedas de rendimento e gera alertas a partir de dados de GPS.</p>
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-widest text-primary mb-2" data-i18n="label_contribution">Minha contribuição</p>
+                        <ul class="list-disc pl-5 space-y-1 text-sm text-gray-700 dark:text-gray-200">
+                            <li data-i18n="academic_5sem_c1">Modelagem do banco com Prisma (User, Athlete, Session, Alert)</li>
+                            <li data-i18n="academic_5sem_c2">Provisionamento do PostgreSQL no Supabase e migrations</li>
+                            <li data-i18n="academic_5sem_c3">Algoritmo de detecção de anomalias e criptografia AES-256-GCM do nome do atleta</li>
+                        </ul>
+                    </div>
+                    <p class="text-[11px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">React, Node.js, Prisma, PostgreSQL, Python, FastAPI</p>
+                    <a href="https://github.com/TechWizards-Tech/wizard-vision" target="_blank" rel="noopener noreferrer"
+                        aria-label="Ver repositório do projeto do 5º semestre no GitHub"
+                        class="mt-auto self-start inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-white text-sm font-bold shadow-lg shadow-primary/30 hover:bg-black transition-colors">
+                        <span class="material-symbols-outlined text-lg">code</span>
+                        <span data-i18n="link_github">Ver no GitHub</span>
+                    </a>
+                </div>
+            </article>
+
+            <!-- ======= NOVOS PROJETOS ACADÊMICOS =======
+                 Para adicionar o próximo semestre, copie um <article> acima e troque:
+                 - a imagem (coloque em imagens/ e em docs/imagens/)
+                 - semestre no formato "6DSM – 2º Sem. 2026", papel, título, descrição,
+                   contribuição pessoal, tecnologias e link do repositório
+                 - as chaves data-i18n (academic_6sem_...) e adicione-as nas traduções pt/en no final do arquivo.
+                 Classes novas do Tailwind exigem recompilar o css/style.css.
+            -->
+        </div>
+    </section>
+
+    <!-- Outros projetos, integrações e automações -->
+    <section class="py-20 bg-white dark:bg-[#1a0d11]" id="labs">
+        <div class="container mx-auto px-6">
+            <div class="mb-12">
+                <h2 class="text-sm font-bold text-primary tracking-widest uppercase mb-2" data-i18n="section_labs_kicker">
+                    Integrações & Dados</h2>
+                <h3 class="text-4xl md:text-5xl font-bold text-[#181113] dark:text-white" data-i18n="section_labs_title">Projetos Profissionais</h3>
+            </div>
+
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <!-- Gerador de PDF -->
+                <article
+                    class="flex flex-col p-6 rounded-2xl border border-gray-200 dark:border-gray-800 bg-background-light dark:bg-background-dark hover:border-primary/60 hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg">
+                    <h4 class="text-xl font-bold mb-2" data-i18n="pdf_title">Gerador de PDF</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-300 flex-1" data-i18n="pdf_desc">
+                        Projeto em Python + Flask que gera um PDF estilizado com informações comerciais extraídas
+                        automaticamente de um banco de dados MySQL.
+                    </p>
+                    <p class="text-[10px] font-bold text-primary mt-4 uppercase tracking-wider">Python, Flask, MySQL</p>
+                    <a href="https://github.com/ferreira-me/GERADOR_PDF" target="_blank" rel="noopener noreferrer"
+                        class="mt-4 inline-flex items-center gap-2 font-bold text-sm hover:text-primary transition-colors">
+                        <span data-i18n="link_view_repo">Ver repositório</span>
+                        <span class="material-symbols-outlined text-base">arrow_outward</span>
+                    </a>
+                </article>
+
+                <!-- RD Station -->
+                <article
+                    class="flex flex-col p-6 rounded-2xl border border-gray-200 dark:border-gray-800 bg-background-light dark:bg-background-dark hover:border-primary/60 hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg">
+                    <h4 class="text-xl font-bold mb-2" data-i18n="rd_title">Extração de dados RD Station</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-300 flex-1" data-i18n="rd_desc">
+                        Ferramenta que extrai e organiza dados das APIs do RD Station, exportando para Excel e Google
+                        Sheets.
+                    </p>
+                    <p class="text-[10px] font-bold text-primary mt-4 uppercase tracking-wider">Python, APIs, Pandas</p>
+                    <a href="https://github.com/ferreira-me/RDSTATION_DATA_EXTRACTOR" target="_blank"
+                        rel="noopener noreferrer"
+                        class="mt-4 inline-flex items-center gap-2 font-bold text-sm hover:text-primary transition-colors">
+                        <span data-i18n="link_view_repo">Ver repositório</span>
+                        <span class="material-symbols-outlined text-base">arrow_outward</span>
+                    </a>
+                </article>
+
+                <!-- Buscador no banco -->
+                <article
+                    class="flex flex-col p-6 rounded-2xl border border-gray-200 dark:border-gray-800 bg-background-light dark:bg-background-dark hover:border-primary/60 hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg">
+                    <h4 class="text-xl font-bold mb-2" data-i18n="search_title">Buscador de valores no Banco de Dados
+                    </h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-300 flex-1" data-i18n="search_desc">
+                        Script Python que busca uma palavra em todas as colunas textuais de um banco MySQL, ignorando
+                        maiúsculas e minúsculas.
+                    </p>
+                    <p class="text-[10px] font-bold text-primary mt-4 uppercase tracking-wider">Python, MySQL</p>
+                    <a href="https://github.com/ferreira-me/BUSCADOR_PALAVRA_BANCO_DE_DADOS" target="_blank"
+                        rel="noopener noreferrer"
+                        class="mt-4 inline-flex items-center gap-2 font-bold text-sm hover:text-primary transition-colors">
+                        <span data-i18n="link_view_repo">Ver repositório</span>
+                        <span class="material-symbols-outlined text-base">arrow_outward</span>
+                    </a>
+                </article>
+
+                <!-- ShipsGo -->
+                <article
+                    class="flex flex-col p-6 rounded-2xl border border-gray-200 dark:border-gray-800 bg-background-light dark:bg-background-dark hover:border-primary/60 hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg">
+                    <h4 class="text-xl font-bold mb-2" data-i18n="shipsgo_title">Integração com a API da ShipsGo</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-300 flex-1" data-i18n="shipsgo_desc">
+                        Integração que insere e consulta status de remessas via API da ShipsGo e consolida os resultados
+                        para visualização em dashboard e alertas.
+                    </p>
+                    <p class="text-[10px] font-bold text-primary mt-4 uppercase tracking-wider">Python, APIs, Dashboards
+                    </p>
+                    <span
+                        class="mt-4 inline-flex w-fit items-center gap-2 text-xs font-bold px-3 py-1 rounded-full bg-gray-100 dark:bg-white/10 text-gray-500 dark:text-gray-400">
+                        <span class="material-symbols-outlined text-sm">lock</span>
+                        <span data-i18n="badge_private">Repositório privado</span>
+                    </span>
+                </article>
+
+                <!-- Sistema interno -->
+                <article
+                    class="flex flex-col p-6 rounded-2xl border border-gray-200 dark:border-gray-800 bg-background-light dark:bg-background-dark hover:border-primary/60 hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg">
+                    <h4 class="text-xl font-bold mb-2" data-i18n="internal_title">Sistema interno — comercial,
+                        operacional e financeiro</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-300 flex-1" data-i18n="internal_desc">
+                        Sistema interno com funcionalidades para apoiar as áreas comercial, operacional e financeira,
+                        melhorando produtividade, padronização e rastreabilidade dos processos.
+                    </p>
+                    <p class="text-[10px] font-bold text-primary mt-4 uppercase tracking-wider">React, Python,
+                        PostgreSQL</p>
+                    <span
+                        class="mt-4 inline-flex w-fit items-center gap-2 text-xs font-bold px-3 py-1 rounded-full bg-gray-100 dark:bg-white/10 text-gray-500 dark:text-gray-400">
+                        <span class="material-symbols-outlined text-sm">lock</span>
+                        <span data-i18n="badge_private">Repositório privado</span>
+                    </span>
+                </article>
+
+                <!-- Verificador de erros -->
+                <article
+                    class="flex flex-col p-6 rounded-2xl border border-gray-200 dark:border-gray-800 bg-background-light dark:bg-background-dark hover:border-primary/60 hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg">
+                    <h4 class="text-xl font-bold mb-2" data-i18n="checker_title">Sistema Verificador de Erros</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-300 flex-1" data-i18n="checker_desc">
+                        Sistema que valida etapas de um processo operacional e identifica inconsistências, reduzindo
+                        retrabalho e prevenindo falhas antes que cheguem ao cliente.
+                    </p>
+                    <p class="text-[10px] font-bold text-primary mt-4 uppercase tracking-wider">Python, Regras de
+                        negócio</p>
+                    <span
+                        class="mt-4 inline-flex w-fit items-center gap-2 text-xs font-bold px-3 py-1 rounded-full bg-gray-100 dark:bg-white/10 text-gray-500 dark:text-gray-400">
+                        <span class="material-symbols-outlined text-sm">lock</span>
+                        <span data-i18n="badge_private">Repositório privado</span>
+                    </span>
+                </article>
+
+                <!-- Automações de rotinas -->
+                <article
+                    class="flex flex-col p-6 rounded-2xl border border-gray-200 dark:border-gray-800 bg-background-light dark:bg-background-dark hover:border-primary/60 hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg">
+                    <h4 class="text-xl font-bold mb-2" data-i18n="rpa_title">Automações de rotinas diárias</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-300 flex-1" data-i18n="rpa_desc">
+                        Automações para extração e transformação de dados, criação de bases para dashboards e RPA para
+                        extração de relatórios no ERP, reduzindo tarefas manuais.
+                    </p>
+                    <p class="text-[10px] font-bold text-primary mt-4 uppercase tracking-wider">Python, RPA, N8N, ETL
+                    </p>
+                    <span
+                        class="mt-4 inline-flex w-fit items-center gap-2 text-xs font-bold px-3 py-1 rounded-full bg-gray-100 dark:bg-white/10 text-gray-500 dark:text-gray-400">
+                        <span class="material-symbols-outlined text-sm">lock</span>
+                        <span data-i18n="badge_private">Repositório privado</span>
+                    </span>
+                </article>
+
+                <!-- Dados em decisões com IA -->
+                <article
+                    class="flex flex-col p-6 rounded-2xl border border-gray-200 dark:border-gray-800 bg-background-light dark:bg-background-dark hover:border-primary/60 hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg">
+                    <h4 class="text-xl font-bold mb-2" data-i18n="ia_title">Dados em decisões com IA</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-300 flex-1" data-i18n="ia_desc">
+                        Pipelines e modelos que coletam, limpam e analisam dados para gerar previsões, insights e
+                        dashboards acionáveis.
+                    </p>
+                    <p class="text-[10px] font-bold text-primary mt-4 uppercase tracking-wider">Python, Pandas, IA,
+                        Dashboards</p>
+                    <span
+                        class="mt-4 inline-flex w-fit items-center gap-2 text-xs font-bold px-3 py-1 rounded-full bg-gray-100 dark:bg-white/10 text-gray-500 dark:text-gray-400">
+                        <span class="material-symbols-outlined text-sm">lock</span>
+                        <span data-i18n="badge_private">Repositório privado</span>
+                    </span>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section Split Screen -->
+    <section
+        class="min-h-screen flex flex-col md:flex-row bg-background-light dark:bg-background-dark overflow-hidden relative"
+        id="about">
+        <!-- Decorative Sage blob -->
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-sage/10 rounded-full blur-[120px] pointer-events-none">
+        </div>
+        <!-- Left: Image -->
+        <div class="w-full md:w-1/2 h-[50vh] md:h-auto relative p-6 md:p-12 flex items-center justify-center">
+            <div
+                class="relative w-full max-w-md aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl rotate-[-2deg] hover:rotate-0 transition-transform duration-700">
+                <div class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent mix-blend-overlay z-10">
+                </div>
+                <img alt="Foto de perfil de Maria Eduarda"
+                    class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                    src="imagens/perfil.jpeg" loading="lazy" />
+            </div>
+        </div>
+        <!-- Right: Content -->
+        <div class="w-full md:w-1/2 flex flex-col justify-center p-8 md:p-20 z-10">
+            <h2 class="text-sm font-bold text-primary tracking-widest uppercase mb-4" data-i18n="about_title">Sobre Mim
+            </h2>
+            <h3 class="text-4xl md:text-5xl font-bold mb-8 leading-tight text-[#181113] dark:text-white"
+                data-i18n-html="about_headline">
+                Desenvolvendo sistemas inteligentes,<br />
+                <span class="text-sage">construindo soluções com propósito.</span>
+            </h3>
+            <div class="space-y-6 text-lg text-gray-600 dark:text-gray-300">
+                <p data-i18n="about_p1">
+                    Desenvolvo sistemas que transformam processos complexos em soluções digitais eficientes. Meu foco
+                    está na criação de aplicações robustas, escaláveis e orientadas a resultados, sempre priorizando
+                    performance e arquitetura bem estruturada.
+                </p>
+                <p data-i18n="about_p2">
+                    Especializada em integrações com Inteligência Artificial e automação de processos, aplico
+                    tecnologia para reduzir tarefas manuais, otimizar operações e apoiar decisões estratégicas.
+                    Acredito que sistemas não devem apenas funcionar — eles devem evoluir junto com o negócio.
+                </p>
+            </div>
+            <div class="mt-12 flex flex-wrap gap-4">
+                <a href="https://www.linkedin.com/in/mariafs15" target="_blank" rel="noopener noreferrer"
+                    class="px-8 py-4 bg-primary text-white rounded-lg font-bold hover:bg-[#c41550] transition-all transform hover:-translate-y-1 shadow-lg shadow-primary/30 flex items-center gap-2">
+                    <span class="material-symbols-outlined">work</span>
+                    <span data-i18n="btn_linkedin">Ver LinkedIn</span>
+                </a>
+                <a href="https://github.com/ferreira-me" target="_blank" rel="noopener noreferrer"
+                    class="px-8 py-4 border border-gray-300 dark:border-gray-700 text-[#181113] dark:text-white rounded-lg font-bold hover:bg-gray-100 dark:hover:bg-white/10 transition-all flex items-center gap-2">
+                    <span class="material-symbols-outlined">code</span>
+                    <span data-i18n="btn_github">Ver GitHub</span>
+                </a>
+            </div>
+            <!-- Tech Stack Pills -->
+            <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+                <p class="text-sm text-gray-500 mb-4" data-i18n="core_technologies">Principais Tecnologias</p>
+                <div class="flex flex-wrap gap-2">
+                    <span
+                        class="px-3 py-1 bg-white dark:bg-white/10 rounded-full text-sm border border-gray-200 dark:border-gray-700">JavaScript
+                        (ES6+)</span>
+                    <span
+                        class="px-3 py-1 bg-white dark:bg-white/10 rounded-full text-sm border border-gray-200 dark:border-gray-700">React</span>
+                    <span
+                        class="px-3 py-1 bg-white dark:bg-white/10 rounded-full text-sm border border-gray-200 dark:border-gray-700">TypeScript</span>
+                    <span
+                        class="px-3 py-1 bg-white dark:bg-white/10 rounded-full text-sm border border-gray-200 dark:border-gray-700">Python</span>
+                    <span
+                        class="px-3 py-1 bg-white dark:bg-white/10 rounded-full text-sm border border-gray-200 dark:border-gray-700">Tailwind
+                        CSS</span>
+                    <span
+                        class="px-3 py-1 bg-white dark:bg-white/10 rounded-full text-sm border border-gray-200 dark:border-gray-700"
+                        data-i18n="tech_ai">Inteligência Artificial</span>
+                    <span
+                        class="px-3 py-1 bg-white dark:bg-white/10 rounded-full text-sm border border-gray-200 dark:border-gray-700">PostgreSQL</span>
+                    <span
+                        class="px-3 py-1 bg-white dark:bg-white/10 rounded-full text-sm border border-gray-200 dark:border-gray-700">MySQL</span>
+                    <span
+                        class="px-3 py-1 bg-white dark:bg-white/10 rounded-full text-sm border border-gray-200 dark:border-gray-700">Pandas</span>
+                    <span
+                        class="px-3 py-1 bg-white dark:bg-white/10 rounded-full text-sm border border-gray-200 dark:border-gray-700">N8N</span>
+                    <span
+                        class="px-3 py-1 bg-white dark:bg-white/10 rounded-full text-sm border border-gray-200 dark:border-gray-700"
+                        data-i18n="tech_automation">Automação</span>
+                    <span
+                        class="px-3 py-1 bg-white dark:bg-white/10 rounded-full text-sm border border-gray-200 dark:border-gray-700">Dashboards</span>
+                    <span
+                        class="px-3 py-1 bg-white dark:bg-white/10 rounded-full text-sm border border-gray-200 dark:border-gray-700">APIs</span>
+                    <span
+                        class="px-3 py-1 bg-white dark:bg-white/10 rounded-full text-sm border border-gray-200 dark:border-gray-700">Node.js</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Footer -->
+    <footer class="bg-[#181113] text-white pt-24 pb-12 relative overflow-hidden" id="contact">
+        <!-- Abstract Decoration -->
+        <div class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-primary/20 rounded-full blur-[100px]"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid md:grid-cols-2 gap-16 mb-20">
+                <div>
+                    <h2 class="text-6xl md:text-8xl font-bold tracking-tighter mb-8" data-i18n-html="footer_talk">
+                        Vamos<br />Conversar.</h2>
+                    <p class="text-xl text-gray-400 max-w-sm" data-i18n="footer_available">
+                        Disponível para projetos freelance e aberta a novas oportunidades.
+                    </p>
+                    <p class="mt-8 text-gray-500" data-i18n="footer_reach">
+                        Me chama pelo LinkedIn ou dá uma olhada nos repositórios no GitHub.
+                    </p>
+                </div>
+                <div class="flex flex-col justify-end items-start md:items-end gap-6">
+                    <a class="group flex items-center gap-4 text-4xl md:text-6xl font-bold hover:text-primary transition-colors"
+                        href="https://www.linkedin.com/in/mariafs15" target="_blank" rel="noopener noreferrer">
+                        <span
+                            class="opacity-0 group-hover:opacity-100 transition-opacity -translate-x-4 group-hover:translate-x-0 duration-300 text-2xl material-symbols-outlined">arrow_right_alt</span>
+                        LinkedIn
+                    </a>
+                    <a class="group flex items-center gap-4 text-4xl md:text-6xl font-bold hover:text-primary transition-colors"
+                        href="https://github.com/ferreira-me" target="_blank" rel="noopener noreferrer">
+                        <span
+                            class="opacity-0 group-hover:opacity-100 transition-opacity -translate-x-4 group-hover:translate-x-0 duration-300 text-2xl material-symbols-outlined">arrow_right_alt</span>
+                        GitHub
+                    </a>
+                </div>
+            </div>
+            <div
+                class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 text-sm text-gray-500">
+                <p>© <span id="year">2026</span> Maria Eduarda Ferreira — <span data-i18n="footer_rights">Todos os
+                        direitos reservados.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" onclick="closeLightbox()">
+        <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" src="" alt="">
     </div>
-    <div class="scroll-cue">role para ver os projetos ↓</div>
-  </section>
 
-  <!-- Projetos -->
-  <main id="projetos" class="container" role="main">
-    <h2 class="section-title">Projetos realizados</h2>
-    <div class="projects">
-      <article class="card">
-        <h3>Curso Online Metodologia Ágil SCRUM — 1º semestre</h3>
-        <p>Aplicação web sobre Scrum desenvolvida como projeto do 1° semestre na FATEC Jacareí.</p>
-        <a href="https://github.com/TechWizards-Tech/DSM-1" target="_blank" rel="noopener noreferrer">Ver projeto
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7" stroke="currentColor" stroke-width="2"/><path d="M10 7h7v7" stroke="currentColor" stroke-width="2"/></svg>
-        </a>
-      </article>
-      <article class="card">
-        <h3>Contador de Calorias — 2º semestre</h3>
-        <p>Aplicação web que calcula calorias e sugere dietas, desenvolvida no 2° semestre na FATEC Jacareí.</p>
-        <a href="https://github.com/TechWizards-Tech/DSM-2" target="_blank" rel="noopener noreferrer">Ver projeto
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7" stroke="currentColor" stroke-width="2"/><path d="M10 7h7v7" stroke="currentColor" stroke-width="2"/></svg>
-        </a>
-      </article>
-      <article class="card">
-        <h3>Plataforma de Dados Meteorológicos — 3º semestre</h3>
-        <p>Plataforma web para visualização de dados meteorológicos, desenvolvida no 3° semestre da FATEC Jacareí.</p>
-        <a href="https://github.com/TechWizards-Tech/HALF-WIZARDS---DSM-3.git" target="_blank" rel="noopener noreferrer">Ver projeto
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7" stroke="currentColor" stroke-width="2"/><path d="M10 7h7v7" stroke="currentColor" stroke-width="2"/></svg>
-        </a>
-      </article>
-      <article class="card">
-        <h3>Gerador de PDF</h3>
-        <p>Projeto em Python + Flask que gera um PDF estilizado com informações comerciais extraídas automaticamente de um banco de dados MySQL.</p>
-        <a href="https://github.com/ferreira-me/GERADOR_PDF.git" target="_blank" rel="noopener noreferrer">Ver projeto
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7" stroke="currentColor" stroke-width="2"/><path d="M10 7h7v7" stroke="currentColor" stroke-width="2"/></svg>
-        </a>
-      </article>
-      <article class="card">
-        <h3>Extração dados RD Station</h3>
-        <p>Ferramenta que extrai e organiza dados das APIs do RD Station, exportando para Excel e Google Sheets.</p>
-        <a href="https://github.com/ferreira-me/RDSTATION_DATA_EXTRACTOR.git" target="_blank" rel="noopener noreferrer">Ver projeto
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7" stroke="currentColor" stroke-width="2"/><path d="M10 7h7v7" stroke="currentColor" stroke-width="2"/></svg>
-        </a>
-      </article>
-      <article class="card">
-        <h3>Buscador de valores no Banco de Dados</h3>
-        <p>Script Python que busca uma palavra em todas as colunas textuais de um banco MySQL, ignorando maiúsculas/minúsculas.</p>
-        <a href="https://github.com/ferreira-me/BUSCADOR_PALAVRA_BANCO_DE_DADOS.git" target="_blank" rel="noopener noreferrer">Ver projeto
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7" stroke="currentColor" stroke-width="2"/><path d="M10 7h7v7" stroke="currentColor" stroke-width="2"/></svg>
-        </a>
-      </article>
-      <article class="card">
-        <h3>Extração de dados com API para implementar em dashboard — ShipsGo </h3>
-        <p>Integração que insere e consulta status de remessas via API da ShipsGo e consolida os resultados para visualização e alertas. <strong>Repositório privado</strong>.</p>
-        <a href="mailto:mferreira1502s@gmail.com?subject=Solicitar%20demonstra%C3%A7%C3%A3o%20ShipsGo&body=Ol%C3%A1%20Maria%2C%0D%0AQuero%20ver%20uma%20demonstra%C3%A7%C3%A3o%20do%20projeto%20de%20integra%C3%A7%C3%A3o%20com%20a%20API%20da%20ShipsGo.%0D%0AObrigada(o)!" aria-label="Solicitar demonstração do projeto ShipsGo">Solicitar demonstração</a>
-      </article>
-      <article class="card">
-        <h3>Transformo dados em decisões com IA</h3>
-        <p>Construo pipelines e modelos que coletam, limpam e analisam dados para gerar previsões, insights e dashboards acionáveis. <strong>Repositório privado</strong>.</p>
-        <a href="mailto:mferreira1502s@gmail.com?subject=Solicitar%20demonstra%C3%A7%C3%A3o%20ShipsGo&body=Ol%C3%A1%20Maria%2C%0D%0AQuero%20ver%20uma%20demonstra%C3%A7%C3%A3o%20do%20projeto%20de%20integra%C3%A7%C3%A3o%20com%20a%20API%20da%20ShipsGo.%0D%0AObrigada(o)!" aria-label="Solicitar demonstração do projeto ShipsGo">Solicitar demonstração</a>
-      </article>
-    </div>
-  </main>
+    <script>
+        function openLightbox(src, alt) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
 
-  <footer class="container" style="padding:28px 0; color:var(--muted);">
-    © <script>document.write(new Date().getFullYear())</script> Maria Eduarda Ferreira — Todos os direitos reservados.
-  </footer>
+            lightboxImg.src = src;
+            lightboxImg.alt = alt;
+
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scroll
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scroll
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        function scrollProjects(direction) {
+            const container = document.getElementById('works-container');
+            if (container) {
+                const scrollAmount = container.clientWidth * 0.75; // Scroll 75% of the view width
+                container.scrollBy({
+                    left: direction * scrollAmount,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        function scrollAcademic(direction) {
+            const container = document.getElementById('academic-container');
+            if (container) {
+                const scrollAmount = container.clientWidth * 0.75;
+                container.scrollBy({
+                    left: direction * scrollAmount,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        const translations = {
+            pt: {
+                nav_work: "Pessoais",
+                nav_academic: "Acadêmico",
+                nav_labs: "Profissionais",
+                nav_about: "Sobre",
+                nav_contact: "Contato",
+                hero_greeting: "Olá.",
+                hero_intro: "Eu sou Maria Eduarda",
+                hero_role: "Especialista em desenvolvimento de Software com foco em performance e experiência do usuário.",
+                section_selected_works: "Trabalhos Selecionados",
+                section_recent_projects: "Projetos Pessoais",
+                crm_title: "Sistema CRM",
+                lp_title: "Landing Page Promocional",
+                finance_title: "Gestão Financeira Pessoal",
+                petshop_title: "Landing Page Casa de Ração",
+                speak_title: "SpeakMind - Chat de Inglês",
+                theodog_title: "App de Vendas — Casa de Ração",
+                metacerta_title: "Meta Certa",
+                metacerta_desc: "Planejamento financeiro pessoal com IA: controla gastos por categoria, acompanha investimentos e cria recomendações e desafios semanais para bater a meta.",
+                theodog_desc: "App mobile (PWA) para registrar vendas, controlar a caderneta de fiado e fazer os fechamentos diário e mensal do caixa.",
+                section_academic_works: "Jornada Acadêmica",
+                section_academic_projects: "Projetos de Graduação",
+                academic_1sem_sem: "1DSM – 1º Sem. 2024",
+                academic_1sem_role: "Desenvolvedora",
+                academic_1sem_title: "Curso Online de Scrum",
+                academic_1sem_desc: "Aplicação web com um curso sobre a metodologia ágil Scrum, com questões e emissão de certificado.",
+                academic_1sem_c1: "Definição dos elementos das páginas para os protótipos iniciais",
+                academic_1sem_c2: "HTML e CSS das páginas 4 e 5 do curso",
+                academic_1sem_c3: "Página de questões e integração JavaScript para carregar as perguntas no front-end",
+                academic_2sem_sem: "2DSM – 2º Sem. 2024",
+                academic_2sem_role: "Desenvolvedora",
+                academic_2sem_title: "Contador de Calorias",
+                academic_2sem_desc: "Aplicação web que calcula a ingestão calórica diária e sugere dietas personalizadas.",
+                academic_2sem_c1: "Diagramas UML de caso de uso, classe e sequência",
+                academic_2sem_c2: "Telas de login e cadastro, dicas e histórico de ingestão calórica",
+                academic_2sem_c3: "Interface responsiva e gráficos de burndown das sprints",
+                academic_3sem_sem: "3DSM – 1º Sem. 2025",
+                academic_3sem_role: "Product Owner",
+                academic_3sem_title: "Plataforma de Dados Meteorológicos",
+                academic_3sem_desc: "Plataforma web para visualização de dados meteorológicos.",
+                academic_3sem_c1: "Product Owner: priorização do backlog e documentação no README",
+                academic_3sem_c2: "Back-end de autenticação: rotas, controller de usuários e middleware",
+                academic_3sem_c3: "Modelos de usuário e dados meteorológicos e formulário de cadastro em React",
+                academic_4sem_sem: "4DSM – 2º Sem. 2025",
+                academic_4sem_role: "Product Owner",
+                academic_4sem_title: "Captura Remota para Microscópios",
+                academic_4sem_desc: "Sistema que transmite em tempo real as imagens de microscópios ópticos para um app mobile e uma interface web.",
+                academic_4sem_c1: "Product Owner: backlog, tarefas das sprints e documentação",
+                academic_4sem_c2: "Documentos de UX: persona e jornada do usuário",
+                academic_4sem_c3: "Revisão e merge dos pull requests da equipe no fluxo main/dev/feature",
+                academic_5sem_sem: "5DSM – 1º Sem. 2026",
+                academic_5sem_role: "Desenvolvedora",
+                academic_5sem_title: "WizardVision",
+                academic_5sem_desc: "Análise de desempenho físico de atletas de futebol com IA: identifica perfis, detecta quedas de rendimento e gera alertas a partir de dados de GPS.",
+                academic_5sem_c1: "Modelagem do banco com Prisma (User, Athlete, Session, Alert)",
+                academic_5sem_c2: "Provisionamento do PostgreSQL no Supabase e migrations",
+                academic_5sem_c3: "Algoritmo de detecção de anomalias e criptografia AES-256-GCM do nome do atleta",
+                label_contribution: "Minha contribuição",
+                section_labs_kicker: "Integrações & Dados",
+                section_labs_title: "Projetos Profissionais",
+                pdf_title: "Gerador de PDF",
+                pdf_desc: "Projeto em Python + Flask que gera um PDF estilizado com informações comerciais extraídas automaticamente de um banco de dados MySQL.",
+                rd_title: "Extração de dados RD Station",
+                rd_desc: "Ferramenta que extrai e organiza dados das APIs do RD Station, exportando para Excel e Google Sheets.",
+                search_title: "Buscador de valores no Banco de Dados",
+                search_desc: "Script Python que busca uma palavra em todas as colunas textuais de um banco MySQL, ignorando maiúsculas e minúsculas.",
+                shipsgo_title: "Integração com a API da ShipsGo",
+                shipsgo_desc: "Integração que insere e consulta status de remessas via API da ShipsGo e consolida os resultados para visualização em dashboard e alertas.",
+                internal_title: "Sistema interno — comercial, operacional e financeiro",
+                internal_desc: "Sistema interno com funcionalidades para apoiar as áreas comercial, operacional e financeira, melhorando produtividade, padronização e rastreabilidade dos processos.",
+                checker_title: "Sistema Verificador de Erros",
+                checker_desc: "Sistema que valida etapas de um processo operacional e identifica inconsistências, reduzindo retrabalho e prevenindo falhas antes que cheguem ao cliente.",
+                rpa_title: "Automações de rotinas diárias",
+                rpa_desc: "Automações para extração e transformação de dados, criação de bases para dashboards e RPA para extração de relatórios no ERP, reduzindo tarefas manuais.",
+                ia_title: "Dados em decisões com IA",
+                ia_desc: "Pipelines e modelos que coletam, limpam e analisam dados para gerar previsões, insights e dashboards acionáveis.",
+                link_view_repo: "Ver repositório",
+                link_github: "Ver no GitHub",
+                badge_private: "Repositório privado",
+                about_title: "Sobre Mim",
+                about_headline: "Desenvolvendo sistemas inteligentes,<br /><span class='text-sage'>construindo soluções com propósito.</span>",
+                about_p1: "Desenvolvo sistemas que transformam processos complexos em soluções digitais eficientes. Meu foco está na criação de aplicações robustas, escaláveis e orientadas a resultados, sempre priorizando performance e arquitetura bem estruturada.",
+                about_p2: "Especializada em integrações com Inteligência Artificial e automação de processos, aplico tecnologia para reduzir tarefas manuais, otimizar operações e apoiar decisões estratégicas. Acredito que sistemas não devem apenas funcionar — eles devem evoluir junto com o negócio.",
+                btn_linkedin: "Ver LinkedIn",
+                btn_github: "Ver GitHub",
+                tech_ai: "Inteligência Artificial",
+                tech_automation: "Automação",
+                core_technologies: "Principais Tecnologias",
+                footer_talk: "Vamos<br />Conversar.",
+                footer_available: "Disponível para projetos freelance e aberta a novas oportunidades.",
+                footer_reach: "Me chama pelo LinkedIn ou dá uma olhada nos repositórios no GitHub.",
+                footer_rights: "Todos os direitos reservados."
+            },
+            en: {
+                nav_work: "Personal",
+                nav_academic: "Academic",
+                nav_labs: "Professional",
+                nav_about: "About",
+                nav_contact: "Contact",
+                hero_greeting: "Hello.",
+                hero_intro: "I am Maria Eduarda",
+                hero_role: "Software Development Specialist focused on performance and user experience.",
+                section_selected_works: "Selected Works",
+                section_recent_projects: "Personal Projects",
+                crm_title: "CRM System",
+                lp_title: "Promotional Landing Page",
+                finance_title: "Personal Finance Management",
+                petshop_title: "Pet Shop Landing Page",
+                speak_title: "SpeakMind - English Chat",
+                theodog_title: "Sales App — Pet Food Store",
+                metacerta_title: "Meta Certa",
+                metacerta_desc: "AI-powered personal finance planner: tracks spending by category, follows investments and generates recommendations and weekly challenges to reach your goal.",
+                theodog_desc: "Mobile app (PWA) to log sales, manage store credit tabs and run daily and monthly cash closings.",
+                section_academic_works: "Academic Journey",
+                section_academic_projects: "Undergraduate Projects",
+                academic_1sem_sem: "1DSM – 1st Sem. 2024",
+                academic_1sem_role: "Developer",
+                academic_1sem_title: "Online Scrum Course",
+                academic_1sem_desc: "Web application with a course on the Scrum agile framework, including quizzes and a certificate.",
+                academic_1sem_c1: "Defined the page elements for the first prototypes",
+                academic_1sem_c2: "HTML and CSS for pages 4 and 5 of the course",
+                academic_1sem_c3: "Quiz page and JavaScript integration to load the questions on the front end",
+                academic_2sem_sem: "2DSM – 2nd Sem. 2024",
+                academic_2sem_role: "Developer",
+                academic_2sem_title: "Calorie Counter",
+                academic_2sem_desc: "Web application that tracks daily calorie intake and suggests personalized diets.",
+                academic_2sem_c1: "UML use case, class and sequence diagrams",
+                academic_2sem_c2: "Login and sign-up screens, tips and calorie intake history",
+                academic_2sem_c3: "Responsive interface and sprint burndown charts",
+                academic_3sem_sem: "3DSM – 1st Sem. 2025",
+                academic_3sem_role: "Product Owner",
+                academic_3sem_title: "Weather Data Platform",
+                academic_3sem_desc: "Web platform for visualizing weather data.",
+                academic_3sem_c1: "Product Owner: backlog prioritization and README documentation",
+                academic_3sem_c2: "Authentication back end: routes, user controller and middleware",
+                academic_3sem_c3: "User and weather data models, plus the React sign-up form",
+                academic_4sem_sem: "4DSM – 2nd Sem. 2025",
+                academic_4sem_role: "Product Owner",
+                academic_4sem_title: "Remote Microscope Capture",
+                academic_4sem_desc: "System that streams optical microscope images in real time to a mobile app and a web interface.",
+                academic_4sem_c1: "Product Owner: backlog, sprint tasks and documentation",
+                academic_4sem_c2: "UX documents: persona and user journey",
+                academic_4sem_c3: "Reviewed and merged the team's pull requests in the main/dev/feature flow",
+                academic_5sem_sem: "5DSM – 1st Sem. 2026",
+                academic_5sem_role: "Developer",
+                academic_5sem_title: "WizardVision",
+                academic_5sem_desc: "AI-powered physical performance analysis for football players: identifies profiles, detects performance drops and raises alerts from GPS data.",
+                academic_5sem_c1: "Database modeling with Prisma (User, Athlete, Session, Alert)",
+                academic_5sem_c2: "PostgreSQL provisioning on Supabase and migrations",
+                academic_5sem_c3: "Anomaly detection algorithm and AES-256-GCM encryption of athlete names",
+                label_contribution: "My contribution",
+                section_labs_kicker: "Integrations & Data",
+                section_labs_title: "Professional Projects",
+                pdf_title: "PDF Generator",
+                pdf_desc: "Python + Flask project that generates a styled PDF with commercial data pulled automatically from a MySQL database.",
+                rd_title: "RD Station Data Extractor",
+                rd_desc: "Tool that extracts and organizes data from the RD Station APIs, exporting to Excel and Google Sheets.",
+                search_title: "Database Value Finder",
+                search_desc: "Python script that searches a word across every text column of a MySQL database, case-insensitively.",
+                shipsgo_title: "ShipsGo API Integration",
+                shipsgo_desc: "Integration that submits and queries shipment status through the ShipsGo API and consolidates the results for dashboards and alerts.",
+                internal_title: "Internal system — sales, operations and finance",
+                internal_desc: "Internal system supporting the sales, operations and finance teams, improving productivity, standardization and process traceability.",
+                checker_title: "Error Checking System",
+                checker_desc: "System that validates the steps of an operational process and flags inconsistencies, cutting rework and catching failures before they reach the client.",
+                rpa_title: "Daily Routine Automation",
+                rpa_desc: "Automations for data extraction and transformation, dashboard data sources and RPA for pulling ERP reports, cutting down manual work.",
+                ia_title: "Turning Data into Decisions with AI",
+                ia_desc: "Pipelines and models that collect, clean and analyse data to produce forecasts, insights and actionable dashboards.",
+                link_view_repo: "View repository",
+                link_github: "View on GitHub",
+                badge_private: "Private repository",
+                about_title: "About Me",
+                about_headline: "Developing intelligent systems,<br /><span class='text-sage'>building solutions with purpose.</span>",
+                about_p1: "I build systems that transform complex processes into efficient digital solutions. My focus is on creating robust, scalable, and results-oriented applications, always prioritizing performance and well-structured architecture.",
+                about_p2: "Specializing in Artificial Intelligence integrations and process automation, I apply technology to reduce manual tasks, optimize operations, and support strategic decisions. I believe systems shouldn't just work — they should evolve with the business.",
+                btn_linkedin: "View LinkedIn",
+                btn_github: "View GitHub",
+                tech_ai: "Artificial Intelligence",
+                tech_automation: "Automation",
+                core_technologies: "Core Technologies",
+                footer_talk: "Let's<br />Talk.",
+                footer_available: "Available for freelance projects and open to full-time opportunities.",
+                footer_reach: "Reach out on LinkedIn or browse the repositories on GitHub.",
+                footer_rights: "All rights reserved."
+            }
+        };
+
+        let currentLang = 'pt'; // Default language
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'pt' ? 'en' : 'pt';
+            document.documentElement.lang = currentLang === 'pt' ? 'pt-br' : 'en';
+            updateContent();
+            updateFlag();
+        }
+
+        function updateContent() {
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    el.innerText = translations[currentLang][key];
+                }
+            });
+            const htmlElements = document.querySelectorAll('[data-i18n-html]');
+            htmlElements.forEach(el => {
+                const key = el.getAttribute('data-i18n-html');
+                if (translations[currentLang][key]) {
+                    el.innerHTML = translations[currentLang][key];
+                }
+            });
+        }
+
+        function updateFlag() {
+            const btn = document.getElementById('lang-toggle');
+            const mobileBtn = document.getElementById('lang-toggle-mobile');
+            const text = currentLang === 'pt' ? 'EN' : 'PT';
+
+            if (btn) btn.innerText = text;
+            if (mobileBtn) mobileBtn.innerText = text;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const yearEl = document.getElementById('year');
+            if (yearEl) yearEl.textContent = new Date().getFullYear();
+            updateContent();
+            updateFlag();
+        });
+    </script>
 </body>
-</html>
 
+</html>
